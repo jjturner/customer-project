@@ -34,7 +34,7 @@ Alien
 Security Guard
 </property>
                 <property name="Active">0</property>
-                <signal name="Changed" handler="cboCustType_OnChange" />
+                <signal name="Changed" handler="cboCustType_OnChange" after="yes" />
               </widget>
               <packing>
                 <property name="LeftAttach">1</property>

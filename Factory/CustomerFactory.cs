@@ -6,19 +6,23 @@ using MiddleLayer;
 
 namespace FactoryCustomer
 {
-	public static class Factory
+	public static class Factory // Design pattern: simple factory pattern
 	{
 		private static Dictionary<string, CustomerBase> custs = 
 			new Dictionary<string, CustomerBase> ();
 		
-		public Factory ()
+		static Factory ()
 		{
-			custs.Add ("Customer", new Customer ());
-			custs.Add ("Lead", new Lead ());
 		}
 
 		public static CustomerBase Create(string TypeCust)
 		{
+			// Design pattern: Lazy loading
+			if (custs.Count == 0) {
+				custs.Add ("Customer", new Customer ());
+				custs.Add ("Lead", new Lead ());
+			}
+			// Design pattern: RIP pattern (Replace If with Polymorphism)
 			return custs [TypeCust];
 		}
 	}
