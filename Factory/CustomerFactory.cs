@@ -8,22 +8,29 @@ namespace FactoryCustomer
 {
 	public static class Factory // Design pattern: simple factory pattern
 	{
-		private static Dictionary<string, CustomerBase> custs = 
-			new Dictionary<string, CustomerBase> ();
-		
-		static Factory ()
+		private static Lazy<Dictionary<string, CustomerBase>> _custs = null;
+		// new Dictionary<string, CustomerBase> ();
+		// private static Lazy<custs> custs = null;
+
+		private static Dictionary<string, CustomerBase> GetCustomerTypes ()
 		{
+			Dictionary<string, CustomerBase> cust_types = new Dictionary<string, CustomerBase> ();
+			cust_types.Add ("Customer", new Customer ());
+			cust_types.Add ("Lead", new Lead ());
+				
+			return cust_types;
 		}
 
-		public static CustomerBase Create(string TypeCust)
+		static Factory ()
 		{
 			// Design pattern: Lazy loading
-			if (custs.Count == 0) {
-				custs.Add ("Customer", new Customer ());
-				custs.Add ("Lead", new Lead ());
-			}
+			_custs = new Lazy<Dictionary<string, CustomerBase>> (() => GetCustomerTypes ());
+		}
+
+		public static CustomerBase Create (string TypeCust)
+		{
 			// Design pattern: RIP pattern (Replace If with Polymorphism)
-			return custs [TypeCust];
+			return _custs.Value [TypeCust];
 		}
 	}
 }
