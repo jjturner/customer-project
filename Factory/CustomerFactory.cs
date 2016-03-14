@@ -2,19 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using InterfaceCustomer;
 using MiddleLayer;
+using Microsoft.Practices.Unity;
+
 
 namespace FactoryCustomer
 {
 	public static class Factory // Design pattern: simple factory pattern
 	{
-		private static Lazy<Dictionary<string, CustomerBase>> _custs = null;
+		private static IUnityContainer custs = null;
+
+		// Lazy step 1:
+		// private static Lazy<Dictionary<string, CustomerBase>> _custs = null;
+
 		// new Dictionary<string, CustomerBase> ();
 		// private static Lazy<custs> custs = null;
 
-		private static Dictionary<string, CustomerBase> GetCustomerTypes ()
+		private static Dictionary<string, ICustomer> GetCustomerTypes ()
 		{
-			Dictionary<string, CustomerBase> cust_types = new Dictionary<string, CustomerBase> ();
+			// Lazy step 3:
+			// (implement assignments)
+			Dictionary<string, ICustomer> cust_types = new Dictionary<string, ICustomer> ();
+
 			cust_types.Add ("Customer", new Customer ());
 			cust_types.Add ("Lead", new Lead ());
 				
@@ -24,13 +34,22 @@ namespace FactoryCustomer
 		static Factory ()
 		{
 			// Design pattern: Lazy loading
-			_custs = new Lazy<Dictionary<string, CustomerBase>> (() => GetCustomerTypes ());
+			// Lazy step 2:
+			// _custs = new Lazy<Dictionary<string, CustomerBase>> (() => GetCustomerTypes ());
 		}
 
-		public static CustomerBase Create (string TypeCust)
+		public static ICustomer Create (string TypeCust)
 		{
+			custs = new UnityContainer ();
+			custs.RegisterType<ICustomer, Customer> ("Customer");
+			custs.RegisterType<ICustomer, Lead> ("Lead");
 			// Design pattern: RIP pattern (Replace If with Polymorphism)
-			return _custs.Value [TypeCust];
+
+			// Lazy step 4:
+			// retrieve Lazy object via Value property
+			// return _custs.Value [TypeCust];
+
+			return custs.Resolve<ICustomer> (TypeCust);
 		}
 	}
 }

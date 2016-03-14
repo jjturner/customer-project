@@ -52,13 +52,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\MiddleLayer.csproj">
-      <Project>{A65EC2BE-F735-40BA-9A8B-23660E6CEF82}</Project>
-      <Name>MiddleLayer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Factory\FactoryCustomer.csproj">
       <Project>{F4C69282-648A-4E08-9D10-630B7706CA4E}</Project>
       <Name>FactoryCustomer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InterfaceCustomer\InterfaceCustomer.csproj">
+      <Project>{AE7D4490-2A92-4202-AA1C-070B5053D694}</Project>
+      <Name>InterfaceCustomer</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

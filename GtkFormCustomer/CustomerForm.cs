@@ -1,12 +1,12 @@
 ﻿using System;
-using MiddleLayer;
+using InterfaceCustomer;
 using FactoryCustomer;
 using Gtk;
 
 public partial class MainWindow: Gtk.Window
 {
 
-	private CustomerBase cust = null;
+	private ICustomer cust = null;
 
 	public MainWindow () : base (Gtk.WindowType.Toplevel)
 	{
