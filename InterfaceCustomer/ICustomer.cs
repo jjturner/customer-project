@@ -11,5 +11,10 @@ namespace InterfaceCustomer
 		string Address { get; set; }
 		void Validate();
 	}
+
+	public interface IValidation<AnyType>
+	{
+		void Validate(AnyType obj);
+	}
 }
 
