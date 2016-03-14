@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using InterfaceCustomer;
+using ValidationAlgorithms;
 using MiddleLayer;
 using Microsoft.Practices.Unity;
 
@@ -25,8 +26,8 @@ namespace FactoryCustomer
 			// (implement assignments)
 			Dictionary<string, ICustomer> cust_types = new Dictionary<string, ICustomer> ();
 
-			cust_types.Add ("Customer", new Customer ());
-			cust_types.Add ("Lead", new Lead ());
+			// cust_types.Add ("Customer", new Customer ());
+			// cust_types.Add ("Lead", new Lead ());
 				
 			return cust_types;
 		}
@@ -41,8 +42,10 @@ namespace FactoryCustomer
 		public static ICustomer Create (string TypeCust)
 		{
 			custs = new UnityContainer ();
-			custs.RegisterType<ICustomer, Customer> ("Customer");
-			custs.RegisterType<ICustomer, Lead> ("Lead");
+			custs.RegisterType<ICustomer, Customer> 
+				("Customer", new InjectionConstructor(new CustomerValidationAll()));
+			custs.RegisterType<ICustomer, Lead>
+				("Lead", new InjectionConstructor(new LeadValidation()));
 			// Design pattern: RIP pattern (Replace If with Polymorphism)
 
 			// Lazy step 4:
