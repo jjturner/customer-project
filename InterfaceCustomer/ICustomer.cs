@@ -12,6 +12,8 @@ namespace InterfaceCustomer
 		void Validate();
 	}
 
+	// Design pattern: Strategy Pattern 
+	// (helps to select algorithms at run time, e.g. Tax calcs, Salary calcs, Validations, etc)
 	public interface IValidation<AnyType>
 	{
 		void Validate(AnyType obj);
