@@ -21,10 +21,15 @@ namespace ADODotNetDAL
 
 		private void Open()
 		{
-			objConn = new NpgsqlConnection  (connection_string);
-			objConn.Open ();
-			objCommand = new NpgsqlCommand ();
-			objCommand.Connection = objConn;
+			try {
+				objConn = new NpgsqlConnection  (connection_string);
+				objConn.Open ();
+				objCommand = new NpgsqlCommand ();
+				objCommand.Connection = objConn;	
+			} catch (Exception ex) {
+				Console.WriteLine ("error is: " + ex.Message + " -- " + ex.Data);
+			}
+
 		}
 		protected abstract void ExecuteCommand (AnyType obj); // will be imp in Child classes
 
@@ -56,7 +61,16 @@ namespace ADODotNetDAL
 		}
 		protected override void ExecuteCommand (ICustomer obj)
 		{
-			objCommand.CommandText = "insert...";
+			objCommand.CommandText = $@"insert into customers(
+				customer_name
+				, bill_amount 
+				, bill_date
+				, phone_number
+				, address)
+				 values 
+				('{obj.CustomerName}',{obj.BillAmount},'{obj.BillDate}','{obj.PhoneNumber}','{obj.Address}')"
+				;
+			objCommand.ExecuteNonQuery();
 		}
 	}
 }

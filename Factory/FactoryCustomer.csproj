@@ -60,6 +60,18 @@
       <Project>{6A32676A-3BBC-4CA3-A401-6E6225519E5D}</Project>
       <Name>ValidationAlgorithms</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ADODotNetDAL\ADODotNetDAL.csproj">
+      <Project>{4A1037C3-702D-4B9B-A282-1FC5C2B75552}</Project>
+      <Name>ADODotNetDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommonDAL\CommonDAL.csproj">
+      <Project>{8CB1EED6-EFA2-4CB8-B9AE-72B856769015}</Project>
+      <Name>CommonDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InterfaceDAL\InterfaceDAL.csproj">
+      <Project>{15F481E9-7587-4A99-8AE5-8017A754D48F}</Project>
+      <Name>InterfaceDAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

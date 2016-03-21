@@ -1,5 +1,6 @@
 ﻿using System;
 using InterfaceCustomer;
+using InterfaceDAL;
 using FactoryCustomer;
 using Gtk;
 
@@ -21,7 +22,7 @@ public partial class MainWindow: Gtk.Window
 
 	protected void cboCustType_OnChange (object sender, EventArgs e)
 	{
-		cust = FactoryCustomer.Factory.Create (cboCustomerType.ActiveText); 
+		cust = Factory<ICustomer>.Create (cboCustomerType.ActiveText); 
 	}
 
 	private void SetCustomer ()
@@ -48,5 +49,13 @@ public partial class MainWindow: Gtk.Window
 			msg.Run ();
 			msg.Destroy ();
 		}
+	}
+
+	protected void cmdAdd_Clicked (object sender, EventArgs e)
+	{
+		SetCustomer ();
+		IDal<ICustomer> dal = Factory<IDal<ICustomer>>.Create ("ADODal");
+		dal.Add (cust);
+		dal.Save ();
 	}
 }

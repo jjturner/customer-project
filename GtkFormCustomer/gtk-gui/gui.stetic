@@ -309,6 +309,9 @@ Lead</property>
           </packing>
         </child>
         <child>
+          <placeholder />
+        </child>
+        <child>
           <widget class="Gtk.HBox" id="hbox2">
             <property name="MemberName" />
             <property name="Spacing">6</property>
@@ -335,15 +338,30 @@ Lead</property>
               <widget class="Gtk.Fixed" id="fixed1">
                 <property name="MemberName" />
                 <property name="HasWindow">False</property>
+                <child>
+                  <widget class="Gtk.Button" id="button1">
+                    <property name="MemberName" />
+                    <property name="WidthRequest">180</property>
+                    <property name="HeightRequest">37</property>
+                    <property name="CanFocus">True</property>
+                    <property name="Type">TextOnly</property>
+                    <property name="Label" translatable="yes">Add Customer</property>
+                    <property name="UseUnderline">True</property>
+                    <property name="BorderWidth">3</property>
+                    <signal name="Clicked" handler="cmdAdd_Clicked" />
+                  </widget>
+                </child>
               </widget>
               <packing>
                 <property name="Position">1</property>
                 <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
               </packing>
             </child>
           </widget>
           <packing>
-            <property name="Position">2</property>
+            <property name="Position">3</property>
             <property name="AutoSize">True</property>
             <property name="Expand">False</property>
             <property name="Fill">False</property>
@@ -376,7 +394,7 @@ Lead</property>
             </child>
           </widget>
           <packing>
-            <property name="Position">3</property>
+            <property name="Position">4</property>
             <property name="AutoSize">True</property>
           </packing>
         </child>

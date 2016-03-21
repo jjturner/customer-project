@@ -5,14 +5,17 @@ using System.Text;
 using InterfaceCustomer;
 using ValidationAlgorithms;
 using MiddleLayer;
+using InterfaceDAL;
+using ADODotNetDAL;
+using CommonDAL;
 using Microsoft.Practices.Unity;
 
 
 namespace FactoryCustomer
 {
-	public static class Factory // Design pattern: simple factory pattern
+	public static class Factory<AnyType> // Design pattern: simple factory pattern
 	{
-		private static IUnityContainer custs = null;
+		private static IUnityContainer project_objects = null;
 
 		// Lazy step 1:
 		// private static Lazy<Dictionary<string, CustomerBase>> _custs = null;
@@ -32,28 +35,38 @@ namespace FactoryCustomer
 			return cust_types;
 		}
 
-		static Factory ()
-		{
+		//static Factory ()
+		//{
 			// Design pattern: Lazy loading
 			// Lazy step 2:
 			// _custs = new Lazy<Dictionary<string, CustomerBase>> (() => GetCustomerTypes ());
-		}
+		//}
 
-		public static ICustomer Create (string TypeCust)
+		public static AnyType Create (string Type)
 		{
-			custs = new UnityContainer ();
-			custs.RegisterType<ICustomer, Customer> 
-				("Customer", new InjectionConstructor(new CustomerValidationAll()));
-			custs.RegisterType<ICustomer, Lead>
-				("Lead", new InjectionConstructor(new LeadValidation()));
+			if (project_objects == null) {
+
+				project_objects = new UnityContainer ();
+				project_objects.RegisterType<ICustomer, Customer> 
+					("Customer", new InjectionConstructor (new CustomerValidationAll ()));
+				project_objects.RegisterType<ICustomer, Lead>
+					("Lead", new InjectionConstructor (new LeadValidation ()));
+				project_objects.RegisterType<IDal<ICustomer>, CustomerDal>
+					("ADODal");
+			}
 			// Design pattern: RIP pattern (Replace If with Polymorphism)
 
 			// Lazy step 4:
 			// retrieve Lazy object via Value property
 			// return _custs.Value [TypeCust];
 
-			return custs.Resolve<ICustomer> (TypeCust);
+			// below connection string works in test_npgsql project
+			return project_objects.Resolve<AnyType> (Type,
+				new ResolverOverride[]
+				{
+					new ParameterOverride("_connection_string",
+						"Host=localhost;Port=5432;Username=postgres;Password=postgres;Database=customer")
+				}); ;
 		}
 	}
 }
-

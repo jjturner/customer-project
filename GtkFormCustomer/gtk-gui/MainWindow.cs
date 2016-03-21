@@ -39,6 +39,8 @@ public partial class MainWindow
 	
 	private global::Gtk.Fixed fixed1;
 	
+	private global::Gtk.Button button1;
+	
 	private global::Gtk.Frame frame1;
 	
 	private global::Gtk.Alignment GtkAlignment;
@@ -54,6 +56,7 @@ public partial class MainWindow
 		this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 		// Container child MainWindow.Gtk.Container+ContainerChild
 		this.vbox1 = new global::Gtk.VBox ();
+		this.vbox1.Name = "vbox1";
 		this.vbox1.Spacing = 6;
 		// Container child vbox1.Gtk.Box+BoxChild
 		this.table1 = new global::Gtk.Table (((uint)(3)), ((uint)(4)), false);
@@ -238,14 +241,26 @@ public partial class MainWindow
 		this.fixed1 = new global::Gtk.Fixed ();
 		this.fixed1.Name = "fixed1";
 		this.fixed1.HasWindow = false;
+		// Container child fixed1.Gtk.Fixed+FixedChild
+		this.button1 = new global::Gtk.Button ();
+		this.button1.WidthRequest = 180;
+		this.button1.HeightRequest = 37;
+		this.button1.CanFocus = true;
+		this.button1.Name = "button1";
+		this.button1.UseUnderline = true;
+		this.button1.BorderWidth = ((uint)(3));
+		this.button1.Label = global::Mono.Unix.Catalog.GetString ("Add Customer");
+		this.fixed1.Add (this.button1);
 		this.hbox2.Add (this.fixed1);
-		global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.fixed1]));
-		w16.Position = 1;
-		this.vbox1.Add (this.hbox2);
-		global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hbox2]));
-		w17.Position = 2;
+		global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.fixed1]));
+		w17.Position = 1;
 		w17.Expand = false;
 		w17.Fill = false;
+		this.vbox1.Add (this.hbox2);
+		global::Gtk.Box.BoxChild w18 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hbox2]));
+		w18.Position = 3;
+		w18.Expand = false;
+		w18.Fill = false;
 		// Container child vbox1.Gtk.Box+BoxChild
 		this.frame1 = new global::Gtk.Frame ();
 		this.frame1.Name = "frame1";
@@ -261,8 +276,8 @@ public partial class MainWindow
 		this.GtkLabel1.UseMarkup = true;
 		this.frame1.LabelWidget = this.GtkLabel1;
 		this.vbox1.Add (this.frame1);
-		global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.frame1]));
-		w19.Position = 3;
+		global::Gtk.Box.BoxChild w20 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.frame1]));
+		w20.Position = 4;
 		this.Add (this.vbox1);
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();
@@ -273,5 +288,6 @@ public partial class MainWindow
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
 		this.cboCustomerType.Changed += new global::System.EventHandler (this.cboCustType_OnChange);
 		this.button2.Clicked += new global::System.EventHandler (this.cmdValidate_Clicked);
+		this.button1.Clicked += new global::System.EventHandler (this.cmdAdd_Clicked);
 	}
 }
