@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using InterfaceDAL;
 
+// all common DAL features go here
 namespace CommonDAL
 {
 	public abstract class AbstractDal<AnyType> : IDal<AnyType>

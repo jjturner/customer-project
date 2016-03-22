@@ -12,14 +12,16 @@ namespace MiddleLayer
 		{
 			validation = obj;	
 		}
+		public string CustomerType { get; set; }
 		public string CustomerName { get; set; }
 		public string PhoneNumber { get; set; }
-		public decimal BillAmount { get; set; }
-		public DateTime BillDate { get; set; }
+		public decimal? BillAmount { get; set; }
+		public DateTime? BillDate { get; set; }
 		public string Address { get; set; }
 
 		public CustomerBase ()
 		{
+			CustomerType = "";
 			CustomerName = "";
 			PhoneNumber = "";
 			BillAmount = 0;

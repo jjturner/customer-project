@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonDAL", "CommonDAL\Comm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADODotNetDAL", "ADODotNetDAL\ADODotNetDAL.csproj", "{4A1037C3-702D-4B9B-A282-1FC5C2B75552}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryDAL", "FactoryDAL\FactoryDAL.csproj", "{CE175D49-F2A1-46F5-9ED3-210EEC288415}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{AE7D4490-2A92-4202-AA1C-070B5053D694}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE7D4490-2A92-4202-AA1C-070B5053D694}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE7D4490-2A92-4202-AA1C-070B5053D694}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE175D49-F2A1-46F5-9ED3-210EEC288415}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE175D49-F2A1-46F5-9ED3-210EEC288415}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE175D49-F2A1-46F5-9ED3-210EEC288415}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE175D49-F2A1-46F5-9ED3-210EEC288415}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F4C69282-648A-4E08-9D10-630B7706CA4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F4C69282-648A-4E08-9D10-630B7706CA4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4C69282-648A-4E08-9D10-630B7706CA4E}.Release|Any CPU.ActiveCfg = Release|Any CPU

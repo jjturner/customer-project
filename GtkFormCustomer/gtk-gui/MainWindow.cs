@@ -43,9 +43,11 @@ public partial class MainWindow
 	
 	private global::Gtk.Frame frame1;
 	
-	private global::Gtk.Alignment GtkAlignment;
+	private global::Gtk.Label GtkLabel2;
 	
-	private global::Gtk.Label GtkLabel1;
+	private global::Gtk.ScrolledWindow GtkScrolledWindow;
+	
+	private global::Gtk.NodeView nodeview_customers;
 
 	protected virtual void Build ()
 	{
@@ -265,29 +267,34 @@ public partial class MainWindow
 		this.frame1 = new global::Gtk.Frame ();
 		this.frame1.Name = "frame1";
 		this.frame1.ShadowType = ((global::Gtk.ShadowType)(0));
-		// Container child frame1.Gtk.Container+ContainerChild
-		this.GtkAlignment = new global::Gtk.Alignment (0F, 0F, 1F, 1F);
-		this.GtkAlignment.Name = "GtkAlignment";
-		this.GtkAlignment.LeftPadding = ((uint)(12));
-		this.frame1.Add (this.GtkAlignment);
-		this.GtkLabel1 = new global::Gtk.Label ();
-		this.GtkLabel1.Name = "GtkLabel1";
-		this.GtkLabel1.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>GtkFrame</b>");
-		this.GtkLabel1.UseMarkup = true;
-		this.frame1.LabelWidget = this.GtkLabel1;
+		this.GtkLabel2 = new global::Gtk.Label ();
+		this.GtkLabel2.Name = "GtkLabel2";
+		this.GtkLabel2.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>GtkFrame</b>");
+		this.GtkLabel2.UseMarkup = true;
+		this.frame1.LabelWidget = this.GtkLabel2;
 		this.vbox1.Add (this.frame1);
-		global::Gtk.Box.BoxChild w20 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.frame1]));
-		w20.Position = 4;
+		global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.frame1]));
+		w19.Position = 4;
+		// Container child vbox1.Gtk.Box+BoxChild
+		this.GtkScrolledWindow = new global::Gtk.ScrolledWindow ();
+		this.GtkScrolledWindow.Name = "GtkScrolledWindow";
+		this.GtkScrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
+		// Container child GtkScrolledWindow.Gtk.Container+ContainerChild
+		this.nodeview_customers = new global::Gtk.NodeView ();
+		this.nodeview_customers.CanFocus = true;
+		this.nodeview_customers.Name = "nodeview_customers";
+		this.GtkScrolledWindow.Add (this.nodeview_customers);
+		this.vbox1.Add (this.GtkScrolledWindow);
+		global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.GtkScrolledWindow]));
+		w21.Position = 5;
 		this.Add (this.vbox1);
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();
 		}
 		this.DefaultWidth = 723;
-		this.DefaultHeight = 321;
+		this.DefaultHeight = 393;
 		this.Show ();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
 		this.cboCustomerType.Changed += new global::System.EventHandler (this.cboCustType_OnChange);
-		this.button2.Clicked += new global::System.EventHandler (this.cmdValidate_Clicked);
-		this.button1.Clicked += new global::System.EventHandler (this.cmdAdd_Clicked);
 	}
 }

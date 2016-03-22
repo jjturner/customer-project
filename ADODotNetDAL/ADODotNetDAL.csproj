@@ -52,6 +52,10 @@
       <Project>{AE7D4490-2A92-4202-AA1C-070B5053D694}</Project>
       <Name>InterfaceCustomer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Factory\FactoryCustomer.csproj">
+      <Project>{F4C69282-648A-4E08-9D10-630B7706CA4E}</Project>
+      <Name>FactoryCustomer</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

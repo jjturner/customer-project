@@ -3,10 +3,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8EDCB267-CE3D-4CE5-84DE-64BF2E51A948}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>GtkFormCustomer</RootNamespace>
-    <AssemblyName>GtkFormCustomer</AssemblyName>
+    <ProjectGuid>{CE175D49-F2A1-46F5-9ED3-210EEC288415}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>FactoryDAL</RootNamespace>
+    <AssemblyName>FactoryDAL</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -29,33 +29,32 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="Mono.Posix" />
-    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="System.Data" />
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="gtk-gui\gui.stetic">
-      <LogicalName>gui.stetic</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="gtk-gui\MainWindow.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CustomerForm.cs" />
-    <Compile Include="TreeNode.cs" />
+    <Compile Include="DalFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\Factory\FactoryCustomer.csproj">
-      <Project>{F4C69282-648A-4E08-9D10-630B7706CA4E}</Project>
-      <Name>FactoryCustomer</Name>
+    <ProjectReference Include="..\ValidationAlgorithms\ValidationAlgorithms.csproj">
+      <Project>{6A32676A-3BBC-4CA3-A401-6E6225519E5D}</Project>
+      <Name>ValidationAlgorithms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MiddleLayer.csproj">
+      <Project>{A65EC2BE-F735-40BA-9A8B-23660E6CEF82}</Project>
+      <Name>MiddleLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\InterfaceCustomer\InterfaceCustomer.csproj">
       <Project>{AE7D4490-2A92-4202-AA1C-070B5053D694}</Project>
@@ -65,9 +64,16 @@
       <Project>{15F481E9-7587-4A99-8AE5-8017A754D48F}</Project>
       <Name>InterfaceDAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FactoryDAL\FactoryDAL.csproj">
-      <Project>{CE175D49-F2A1-46F5-9ED3-210EEC288415}</Project>
-      <Name>FactoryDAL</Name>
+    <ProjectReference Include="..\ADODotNetDAL\ADODotNetDAL.csproj">
+      <Project>{4A1037C3-702D-4B9B-A282-1FC5C2B75552}</Project>
+      <Name>ADODotNetDAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CommonDAL\CommonDAL.csproj">
+      <Project>{8CB1EED6-EFA2-4CB8-B9AE-72B856769015}</Project>
+      <Name>CommonDAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

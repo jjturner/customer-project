@@ -6,8 +6,6 @@ using InterfaceCustomer;
 using ValidationAlgorithms;
 using MiddleLayer;
 using InterfaceDAL;
-using ADODotNetDAL;
-using CommonDAL;
 using Microsoft.Practices.Unity;
 
 
@@ -51,8 +49,6 @@ namespace FactoryCustomer
 					("Customer", new InjectionConstructor (new CustomerValidationAll ()));
 				project_objects.RegisterType<ICustomer, Lead>
 					("Lead", new InjectionConstructor (new LeadValidation ()));
-				project_objects.RegisterType<IDal<ICustomer>, CustomerDal>
-					("ADODal");
 			}
 			// Design pattern: RIP pattern (Replace If with Polymorphism)
 
@@ -61,12 +57,7 @@ namespace FactoryCustomer
 			// return _custs.Value [TypeCust];
 
 			// below connection string works in test_npgsql project
-			return project_objects.Resolve<AnyType> (Type,
-				new ResolverOverride[]
-				{
-					new ParameterOverride("_connection_string",
-						"Host=localhost;Port=5432;Username=postgres;Password=postgres;Database=customer")
-				}); ;
+			return project_objects.Resolve<AnyType> (Type);
 		}
 	}
 }
