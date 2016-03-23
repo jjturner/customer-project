@@ -2,6 +2,7 @@
 using System.Net;
 using System.Globalization;
 using InterfaceCustomer;
+using InterfaceDAL;
 
 namespace MiddleLayer
 {

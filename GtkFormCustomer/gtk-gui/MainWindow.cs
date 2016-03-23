@@ -31,8 +31,6 @@ public partial class MainWindow
 	
 	private global::Gtk.Entry PhoneNumberEntry;
 	
-	private global::Gtk.HBox hbox1;
-	
 	private global::Gtk.HBox hbox2;
 	
 	private global::Gtk.Button button2;
@@ -40,10 +38,6 @@ public partial class MainWindow
 	private global::Gtk.Fixed fixed1;
 	
 	private global::Gtk.Button button1;
-	
-	private global::Gtk.Frame frame1;
-	
-	private global::Gtk.Label GtkLabel2;
 	
 	private global::Gtk.ScrolledWindow GtkScrolledWindow;
 	
@@ -215,13 +209,6 @@ public partial class MainWindow
 		w13.Expand = false;
 		w13.Fill = false;
 		// Container child vbox1.Gtk.Box+BoxChild
-		this.hbox1 = new global::Gtk.HBox ();
-		this.hbox1.Name = "hbox1";
-		this.hbox1.Spacing = 6;
-		this.vbox1.Add (this.hbox1);
-		global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hbox1]));
-		w14.Position = 1;
-		// Container child vbox1.Gtk.Box+BoxChild
 		this.hbox2 = new global::Gtk.HBox ();
 		this.hbox2.Name = "hbox2";
 		this.hbox2.Spacing = 6;
@@ -235,10 +222,10 @@ public partial class MainWindow
 		this.button2.BorderWidth = ((uint)(3));
 		this.button2.Label = global::Mono.Unix.Catalog.GetString ("Validate");
 		this.hbox2.Add (this.button2);
-		global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.button2]));
-		w15.Position = 0;
-		w15.Expand = false;
-		w15.Fill = false;
+		global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.button2]));
+		w14.Position = 0;
+		w14.Expand = false;
+		w14.Fill = false;
 		// Container child hbox2.Gtk.Box+BoxChild
 		this.fixed1 = new global::Gtk.Fixed ();
 		this.fixed1.Name = "fixed1";
@@ -254,27 +241,15 @@ public partial class MainWindow
 		this.button1.Label = global::Mono.Unix.Catalog.GetString ("Add Customer");
 		this.fixed1.Add (this.button1);
 		this.hbox2.Add (this.fixed1);
-		global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.fixed1]));
+		global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.fixed1]));
+		w16.Position = 1;
+		w16.Expand = false;
+		w16.Fill = false;
+		this.vbox1.Add (this.hbox2);
+		global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hbox2]));
 		w17.Position = 1;
 		w17.Expand = false;
 		w17.Fill = false;
-		this.vbox1.Add (this.hbox2);
-		global::Gtk.Box.BoxChild w18 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hbox2]));
-		w18.Position = 3;
-		w18.Expand = false;
-		w18.Fill = false;
-		// Container child vbox1.Gtk.Box+BoxChild
-		this.frame1 = new global::Gtk.Frame ();
-		this.frame1.Name = "frame1";
-		this.frame1.ShadowType = ((global::Gtk.ShadowType)(0));
-		this.GtkLabel2 = new global::Gtk.Label ();
-		this.GtkLabel2.Name = "GtkLabel2";
-		this.GtkLabel2.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>GtkFrame</b>");
-		this.GtkLabel2.UseMarkup = true;
-		this.frame1.LabelWidget = this.GtkLabel2;
-		this.vbox1.Add (this.frame1);
-		global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.frame1]));
-		w19.Position = 4;
 		// Container child vbox1.Gtk.Box+BoxChild
 		this.GtkScrolledWindow = new global::Gtk.ScrolledWindow ();
 		this.GtkScrolledWindow.Name = "GtkScrolledWindow";
@@ -285,16 +260,17 @@ public partial class MainWindow
 		this.nodeview_customers.Name = "nodeview_customers";
 		this.GtkScrolledWindow.Add (this.nodeview_customers);
 		this.vbox1.Add (this.GtkScrolledWindow);
-		global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.GtkScrolledWindow]));
-		w21.Position = 5;
+		global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.GtkScrolledWindow]));
+		w19.Position = 2;
 		this.Add (this.vbox1);
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();
 		}
-		this.DefaultWidth = 723;
-		this.DefaultHeight = 393;
+		this.DefaultWidth = 767;
+		this.DefaultHeight = 439;
 		this.Show ();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
 		this.cboCustomerType.Changed += new global::System.EventHandler (this.cboCustType_OnChange);
+		this.button1.Clicked += new global::System.EventHandler (this.cmdAdd_Clicked);
 	}
 }

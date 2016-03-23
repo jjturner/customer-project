@@ -42,5 +42,9 @@
       <Project>{AE7D4490-2A92-4202-AA1C-070B5053D694}</Project>
       <Name>InterfaceCustomer</Name>
     </ProjectReference>
+    <ProjectReference Include="InterfaceDAL\InterfaceDAL.csproj">
+      <Project>{15F481E9-7587-4A99-8AE5-8017A754D48F}</Project>
+      <Name>InterfaceDAL</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

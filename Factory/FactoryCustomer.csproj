@@ -64,6 +64,10 @@
       <Project>{15F481E9-7587-4A99-8AE5-8017A754D48F}</Project>
       <Name>InterfaceDAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CommonDAL\CommonDAL.csproj">
+      <Project>{8CB1EED6-EFA2-4CB8-B9AE-72B856769015}</Project>
+      <Name>CommonDAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -68,7 +68,7 @@ namespace ADODotNetDAL
 		}
 	}
 
-	public class CustomerDal : TemplateADO<ICustomer>
+	public class CustomerDal : TemplateADO<ICustomer>, IDal<ICustomer>
 	{
 		public CustomerDal (string _connection_string) :
 			base(_connection_string)
@@ -104,14 +104,21 @@ namespace ADODotNetDAL
 		protected override void ExecuteCommand (ICustomer obj)
 		{
 			objCommand.CommandText = $@"insert into customers(
-				customer_name
+				customer_type
+				, customer_name
 				, bill_amount 
 				, bill_date
 				, phone_number
 				, address)
 				 values 
-				('{obj.CustomerName}',{obj.BillAmount},'{obj.BillDate}','{obj.PhoneNumber}','{obj.Address}')"
-				;
+				(
+					'{obj.CustomerType}'
+					, '{obj.CustomerName}'
+					, {obj.BillAmount}
+					, '{obj.BillDate}'
+					, '{obj.PhoneNumber}'
+					, '{obj.Address}'
+				)";
 			objCommand.ExecuteNonQuery();
 		}
 	}

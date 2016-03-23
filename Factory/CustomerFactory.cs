@@ -6,6 +6,7 @@ using InterfaceCustomer;
 using ValidationAlgorithms;
 using MiddleLayer;
 using InterfaceDAL;
+using CommonDAL;
 using Microsoft.Practices.Unity;
 
 

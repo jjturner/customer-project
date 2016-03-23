@@ -11,13 +11,29 @@ public partial class MainWindow: Gtk.Window
 {
 
 	private ICustomer cust = null;
+	private NodeStore store = null;
 
 	public MainWindow () : base (Gtk.WindowType.Toplevel)
 	{
 		Build ();
 		// SetCustomer ();
+		InitializeCustomerGrid();
 		LoadCustomers ();
+	}
 
+	private void InitializeCustomerGrid()
+	{
+		// NodeView needs association to NodeStore in order to render headers
+		store = new NodeStore (typeof(CustomerTreeNode)); 
+		nodeview_customers.NodeStore = store;
+		nodeview_customers.AppendColumn("Type", new CellRendererText(), "text", 0);
+		nodeview_customers.AppendColumn("Cust", new CellRendererText(), "text", 1);
+		nodeview_customers.AppendColumn("Phone", new CellRendererText(), "text", 2);
+		nodeview_customers.AppendColumn("Address", new CellRendererText(), "text", 3);
+		nodeview_customers.AppendColumn("Bill Dt", new CellRendererText(), "text", 4);
+		nodeview_customers.AppendColumn("Bill Amt", new CellRendererText(), "text", 5);
+
+		nodeview_customers.ShowAll ();
 	}
 
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
@@ -33,6 +49,7 @@ public partial class MainWindow: Gtk.Window
 
 	private void SetCustomer ()
 	{
+		cust.CustomerType = cboCustomerType.ActiveText == "Lead" ? "l" : "c";
 		cust.CustomerName = CustNameEntry.Text;
 		cust.PhoneNumber = PhoneNumberEntry.Text;
 		cust.BillAmount = Convert.ToDecimal (BillAmountEntry.Text);
@@ -45,23 +62,23 @@ public partial class MainWindow: Gtk.Window
 		IDal<ICustomer> idal = FactoryDalLayer<IDal<ICustomer>>.Create ("ADODal");  
 		List<ICustomer> custs = idal.Select();
 
-
-		NodeStore store = new NodeStore (typeof(TestTreeNode)); 
-		foreach (ICustomer cust in custs)
+		foreach (ICustomer customer in custs)
 		{
-			TestTreeNode cust_treenode = new TestTreeNode ();
-			cust_treenode.TestColumn = "Krudler!";
-			// cust_treenode.CustomerType = cust
-			store.AddNode(cust_treenode);
+			AddCustomerNode (customer);
 		}
+	}
 
-		nodeview_customers.NodeStore = store;
-		// NodeView cust_nv = nodeview_customers;
-		nodeview_customers.AppendColumn("Farley", new CellRendererText(), "text", 0);
-		nodeview_customers.ShowAll ();
-		// cust_nv.AppendColumn("Customer Type", new CellRendererText(), "text", 0);
-		// cust_nv.AppendColumn("Customer Name", new CellRendererText(), "text", 1);
+	private void AddCustomerNode(ICustomer cust_to_add)
+	{
+		CustomerTreeNode cust_treenode = new CustomerTreeNode ();
+		cust_treenode.CustomerName = cust_to_add.CustomerName;
+		cust_treenode.CustomerType = cust_to_add.CustomerType;
+		cust_treenode.PhoneNumber = cust_to_add.PhoneNumber;
+		cust_treenode.Address = cust_to_add.Address;
+		cust_treenode.BillDate = cust_to_add.BillDate.ToString();
+		cust_treenode.BillAmount = cust_to_add.BillAmount.ToString();
 
+		store.AddNode(cust_treenode);
 	}
 
 	protected void cmdValidate_Clicked (object sender, EventArgs e)
@@ -84,8 +101,12 @@ public partial class MainWindow: Gtk.Window
 	protected void cmdAdd_Clicked (object sender, EventArgs e)
 	{
 		SetCustomer ();
-		IDal<ICustomer> dal = Factory<IDal<ICustomer>>.Create ("ADODal");
+		// took awhile to realize 'Factory' needed to be re-referenced as 'FactoryDalLayer'
+		IDal<ICustomer> dal = FactoryDalLayer<IDal<ICustomer>>.Create ("ADODal");
 		dal.Add (cust);
 		dal.Save ();
+		AddCustomerNode (cust);
+		// TODO: test if ShowAll is necessary after adding node
+		nodeview_customers.ShowAll ();
 	}
 }
