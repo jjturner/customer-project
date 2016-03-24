@@ -18,3 +18,4 @@ _ReSharper.*
 *.obj
 tmp/
 log/
+packages/

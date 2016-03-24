@@ -72,6 +72,10 @@
       <Project>{8CB1EED6-EFA2-4CB8-B9AE-72B856769015}</Project>
       <Name>CommonDAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EF_DAL\EF_DAL.csproj">
+      <Project>{A1D569D2-8F4C-41C7-B6F8-694BF597C013}</Project>
+      <Name>EF_DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
