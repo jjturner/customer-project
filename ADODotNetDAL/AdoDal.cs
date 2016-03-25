@@ -68,7 +68,7 @@ namespace ADODotNetDAL
 		}
 	}
 
-	public class CustomerDal : TemplateADO<ICustomer>, IDal<ICustomer>
+	public class CustomerDal : TemplateADO<CustomerBase>, IDal<CustomerBase>
 	{
 		public CustomerDal (string _connection_string) :
 			base(_connection_string)
@@ -76,15 +76,15 @@ namespace ADODotNetDAL
 				
 		}
 
-		protected override List<ICustomer> ExecuteCommand()
+		protected override List<CustomerBase> ExecuteCommand()
 		{
 			objCommand.CommandText = "select * from customers";
 			NpgsqlDataReader pg_reader = null;
 			pg_reader = objCommand.ExecuteReader ();
-			List<ICustomer> custs = new List<ICustomer> ();
+			List<CustomerBase> custs = new List<CustomerBase> ();
 			while (pg_reader.Read())
 			{
-				ICustomer cust = Factory<ICustomer>.Create ("Customer");
+				CustomerBase cust = Factory<CustomerBase>.Create ("Customer");
 
 				cust.CustomerType = "c";
 				cust.CustomerName = pg_reader ["customer_name"].ToString();
@@ -101,7 +101,7 @@ namespace ADODotNetDAL
 			return custs;
 		}
 
-		protected override void ExecuteCommand (ICustomer obj)
+		protected override void ExecuteCommand (CustomerBase obj)
 		{
 			objCommand.CommandText = $@"insert into customers(
 				customer_type

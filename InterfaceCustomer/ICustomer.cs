@@ -1,5 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
+using Npgsql;
 
 namespace InterfaceCustomer
 {
@@ -15,7 +18,8 @@ namespace InterfaceCustomer
 		void Validate();
 	}
 
-	public abstract class CustomerBase : ICustomer
+	[Table ("customers", Schema = "public")]
+	public class CustomerBase : ICustomer
 	{
 		private IValidation<ICustomer> validation = null;
 		public CustomerBase(IValidation<ICustomer> obj)

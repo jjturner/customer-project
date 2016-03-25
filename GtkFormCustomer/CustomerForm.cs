@@ -4,18 +4,22 @@ using InterfaceCustomer;
 using InterfaceDAL;
 using FactoryCustomer;
 using FactoryDAL;
+using Npgsql;
 using Gtk;
 using GtkFormCustomer;
 
 public partial class MainWindow: Gtk.Window
 {
 
-	private ICustomer cust = null;
+	private CustomerBase cust = null;
 	private NodeStore store = null;
 
 	public MainWindow () : base (Gtk.WindowType.Toplevel)
 	{
 		Build ();
+		// (Default is set via the "Active" property in Stetic)
+		// cboDalType.S.HasDefault = "ADO.NET";
+
 		// SetCustomer ();
 		InitializeCustomerGrid();
 		LoadCustomers ();
@@ -44,7 +48,7 @@ public partial class MainWindow: Gtk.Window
 
 	protected void cboCustType_OnChange (object sender, EventArgs e)
 	{
-		cust = Factory<ICustomer>.Create (cboCustomerType.ActiveText); 
+		cust = Factory<CustomerBase>.Create (cboCustomerType.ActiveText); 
 	}
 
 	private void SetCustomer ()
@@ -59,16 +63,17 @@ public partial class MainWindow: Gtk.Window
 
 	private void LoadCustomers()
 	{
-		IDal<ICustomer> idal = FactoryDalLayer<IDal<ICustomer>>.Create ("ADODal");  
-		List<ICustomer> custs = idal.Select();
+		string dal_type = cboDalType.ActiveText == "ADO.NET" ? "ADODal" : "EF_Dal";
+		IDal<CustomerBase> idal = FactoryDalLayer<IDal<CustomerBase>>.Create (dal_type);  
+		List<CustomerBase> custs = idal.Select();
 
-		foreach (ICustomer customer in custs)
+		foreach (CustomerBase customer in custs)
 		{
 			AddCustomerNode (customer);
 		}
 	}
 
-	private void AddCustomerNode(ICustomer cust_to_add)
+	private void AddCustomerNode(CustomerBase cust_to_add)
 	{
 		CustomerTreeNode cust_treenode = new CustomerTreeNode ();
 		cust_treenode.CustomerName = cust_to_add.CustomerName;
@@ -102,11 +107,18 @@ public partial class MainWindow: Gtk.Window
 	{
 		SetCustomer ();
 		// took awhile to realize 'Factory' needed to be re-referenced as 'FactoryDalLayer'
-		IDal<ICustomer> dal = FactoryDalLayer<IDal<ICustomer>>.Create ("ADODal");
+		IDal<CustomerBase> dal = FactoryDalLayer<IDal<CustomerBase>>.Create ("ADODal");
 		dal.Add (cust);
 		dal.Save ();
 		AddCustomerNode (cust);
 		// TODO: test if ShowAll is necessary after adding node
+		nodeview_customers.ShowAll ();
+	}
+
+	protected void SwitchDAL (object sender, EventArgs e)
+	{
+		store.Clear ();
+		LoadCustomers ();
 		nodeview_customers.ShowAll ();
 	}
 }

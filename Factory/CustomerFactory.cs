@@ -46,9 +46,9 @@ namespace FactoryCustomer
 			if (project_objects == null) {
 
 				project_objects = new UnityContainer ();
-				project_objects.RegisterType<ICustomer, Customer> 
+				project_objects.RegisterType<CustomerBase, Customer> 
 					("Customer", new InjectionConstructor (new CustomerValidationAll ()));
-				project_objects.RegisterType<ICustomer, Lead>
+				project_objects.RegisterType<CustomerBase, Lead>
 					("Lead", new InjectionConstructor (new LeadValidation ()));
 			}
 			// Design pattern: RIP pattern (Replace If with Polymorphism)

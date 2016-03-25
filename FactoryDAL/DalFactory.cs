@@ -8,8 +8,10 @@ using MiddleLayer;
 using CommonDAL;
 using InterfaceDAL;
 using ADODotNetDAL;
+using EF_DAL;
 using Microsoft.Practices.Unity;
-
+using System.Data.Entity;
+using Npgsql;
 
 namespace FactoryDAL
 {
@@ -22,8 +24,10 @@ namespace FactoryDAL
 			if (project_objects == null) {
 
 				project_objects = new UnityContainer ();
-				project_objects.RegisterType<IDal<ICustomer>, CustomerDal>
+				project_objects.RegisterType<IDal<CustomerBase>, CustomerDal>
 					("ADODal");
+				project_objects.RegisterType<IDal<CustomerBase>, EF_CustomerDal>
+					("EF_Dal");
 			}
 
 			// below connection string works in test_npgsql project
