@@ -4,7 +4,7 @@ using InterfaceDAL;
 using InterfaceCustomer;
 using Npgsql;
 using System.Linq;
-
+using MiddleLayer;
 using System.Data;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
@@ -33,7 +33,7 @@ namespace EF_DAL
 			@"Server=localhost;
 				User ID=postgres;
 				Password=postgres;
-				Database=customers;
+				Database=customer;
 				syncnotification=false;
 				port=5432";
 		
@@ -56,6 +56,14 @@ namespace EF_DAL
 
 		public List<AnyType> Select()
 		{
+//			List<AnyType> dataset = Set<AnyType> ()
+//				.AsQueryable<AnyType> ()
+//				.ToList ();
+//
+//			CustomerBase datarow = (CustomerBase)dataset.First();
+//
+//			Console.WriteLine (datarow["CustomerName"].ToString());
+
 			return Set<AnyType> ()
 				.AsQueryable<AnyType> ()
 				.ToList ();
@@ -67,17 +75,34 @@ namespace EF_DAL
 		}
 	}
 
+	/// <summary>
+	/// Subclasses require explicit mapping to entities
+	/// via the property(ies) which distinguish the subclass values
+	/// even when base class is concrete
+	/// in the case when the relevant properties differ from
+	/// the corresponding column names
+	/// (online example only required this mapping when
+	///  used with abstract class since there was no diff betw
+	///  property names and column names) 
+	/// </summary> 
 	public class EF_CustomerDal : EF_DalAbstract<CustomerBase>
 	{
+		// map table to class name
+        public DbSet<CustomerBase> customers { get; set; }
+
 		// mapping
-//		protected override void OnModelCreating(DbModelBuilder modelBuilder)
-//		{
+		protected override void OnModelCreating(DbModelBuilder modelBuilder)
+		{
+// 	  	(below commented line is equivalent to DbSet mapping above)
 //			modelBuilder.Entity<CustomerBase> ()
 //				.ToTable ("customers");
-//		}
+			modelBuilder.Entity<CustomerBase> ()
+				.Map<Customer> (m => m.Requires ("customer_type").HasValue ("c"))
+				.Map<Lead> (m => m.Requires ("customer_type").HasValue ("l"));
+			modelBuilder.Entity<CustomerBase> ()
+				.Ignore (t => t.CustomerType);
+		}
 
-		// now ref table to class name
-        public DbSet<CustomerBase> customers { get; set; }
 	}
 
 	class NpgsqlConfiguration : DbConfiguration
@@ -97,7 +122,7 @@ namespace EF_DAL
 			@"Server=localhost;
 				User ID=postgres;
 				Password=postgres;
-				Database=customers;
+				Database=customer;
 				syncnotification=false;
 				port=5432";
 

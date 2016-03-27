@@ -27,12 +27,19 @@ namespace InterfaceCustomer
 			validation = obj;	
 		}
 		[Key]
+		[Column("cust_id")]
 		public int CustID { get; set; }
+		[Column("customer_type")]
 		public string CustomerType { get; set; }
+		[Column("customer_name")]
 		public string CustomerName { get; set; }
+		[Column("phone_number")]
 		public string PhoneNumber { get; set; }
+		[Column("bill_amount")]
 		public decimal? BillAmount { get; set; }
+		[Column("bill_date")]
 		public DateTime? BillDate { get; set; }
+		[Column("address")]
 		public string Address { get; set; }
 
 		public CustomerBase ()

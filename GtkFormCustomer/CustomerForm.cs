@@ -107,7 +107,7 @@ public partial class MainWindow: Gtk.Window
 	{
 		SetCustomer ();
 		// took awhile to realize 'Factory' needed to be re-referenced as 'FactoryDalLayer'
-		IDal<CustomerBase> dal = FactoryDalLayer<IDal<CustomerBase>>.Create ("ADODal");
+		IDal<CustomerBase> dal = FactoryDalLayer<IDal<CustomerBase>>.Create ("EF_Dal");
 		dal.Add (cust);
 		dal.Save ();
 		AddCustomerNode (cust);
@@ -118,6 +118,7 @@ public partial class MainWindow: Gtk.Window
 	protected void SwitchDAL (object sender, EventArgs e)
 	{
 		store.Clear ();
+		nodeview_customers.NodeStore = store;
 		LoadCustomers ();
 		nodeview_customers.ShowAll ();
 	}
